@@ -1,4 +1,4 @@
-package br.com.teste.app_paises;
+package br.com.teste.app_paises.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,17 +10,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+import br.com.teste.app_paises.R;
+
+public class ListaPaisesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_lista_paises);
         setTitle("Lista de Países");
         List<String> paises = new ArrayList<>(
                 Arrays.asList("Brasil", "Argentina", "Chile"));
 
-        ListView listaDePaises = findViewById(R.id.activity_main_lista_de_paises);
+        ListView listaDePaises = findViewById(R.id.activity_lista_paises_listview);
 
         listaDePaises.setAdapter(new ArrayAdapter<>(
                 this,

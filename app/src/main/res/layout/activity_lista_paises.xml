@@ -7,12 +7,12 @@
 
 
     <ListView
-        android:id="@+id/activity_main_lista_de_paises"
+        android:id="@+id/activity_lista_paises_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/activity_main_fab_novo_pais"
+        android:id="@+id/activity_lista_fab_novo_pais"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"

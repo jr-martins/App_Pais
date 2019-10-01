@@ -44,19 +44,18 @@ public class ListaPaisesActivity extends AppCompatActivity {
 
     }
 
-    protected void OnResume(){
-
+    @Override
+    protected void onResume() {
         super.onResume();
 
         PaisDao dao = new PaisDao();
-
-
         ListView listaDePaises = findViewById(R.id.activity_lista_paises_listview);
-
         listaDePaises.setAdapter(new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 dao.todos()));
     }
+
+
 
 }

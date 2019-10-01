@@ -2,7 +2,9 @@ package br.com.teste.app_paises.model;
 
 import androidx.annotation.NonNull;
 
-public class Pais {
+import java.io.Serializable;
+
+public class Pais implements Serializable {
 
 
     private final String pais;
@@ -12,6 +14,14 @@ public class Pais {
 
         this.pais = pais;
         this.continente = continente;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public String getContinente() {
+        return continente;
     }
 
     @NonNull

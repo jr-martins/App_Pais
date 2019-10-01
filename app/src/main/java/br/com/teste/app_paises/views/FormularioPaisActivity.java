@@ -2,10 +2,13 @@ package br.com.teste.app_paises.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import java.io.Serializable;
 
 import br.com.teste.app_paises.dao.PaisDao;
 import br.com.teste.app_paises.R;
@@ -29,6 +32,18 @@ public class FormularioPaisActivity extends AppCompatActivity {
 
         inicializacaoCampos();
         configuraBotaoSalvar();
+
+        Intent dados = getIntent();
+        Pais pais = (Pais) dados.getSerializableExtra("pais");
+
+
+        campoPais.setText(pais.getPais());
+        campoContinente.setText(pais.getContinente());
+
+
+
+
+
     }
 
     private void configuraBotaoSalvar() {

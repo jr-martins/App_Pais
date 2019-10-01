@@ -4,15 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
+import java.util.List;
+
 import br.com.teste.app_paises.R;
 import br.com.teste.app_paises.dao.PaisDao;
+import br.com.teste.app_paises.model.Pais;
 
 public class ListaPaisesActivity extends AppCompatActivity {
 
@@ -54,10 +60,26 @@ public class ListaPaisesActivity extends AppCompatActivity {
 
     private void configuraLista() {
         ListView listaDePaises = findViewById(R.id.activity_lista_paises_listview);
+        final List<Pais> paises = dao.todos();
         listaDePaises.setAdapter(new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
-                dao.todos()));
+                paises));
+
+        listaDePaises.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
+                Pais paisEscolhido = paises.get(posicao);
+                Intent vaiParaFormularioActivity = new Intent(ListaPaisesActivity.this, FormularioPaisActivity.class);
+
+                vaiParaFormularioActivity.putExtra("pais", paisEscolhido);
+
+                startActivity(vaiParaFormularioActivity);
+
+
+            }
+        });
+
     }
 
 }

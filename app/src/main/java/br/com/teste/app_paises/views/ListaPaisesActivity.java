@@ -10,52 +10,54 @@ import android.widget.ListView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import br.com.teste.app_paises.R;
 import br.com.teste.app_paises.dao.PaisDao;
 
 public class ListaPaisesActivity extends AppCompatActivity {
 
+    public static final String TITULO_APPBAR = "Lista de Países";
+    private final PaisDao dao = new PaisDao();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_paises);
 
+        setTitle(TITULO_APPBAR);
 
+        configuraFabNovoPais();
 
+    }
 
-        setTitle("Lista de Países");
+    private void configuraFabNovoPais() {
+        FloatingActionButton botaoNovoPais = findViewById(R.id.activity_lista_fab_novo_pais);
+        botaoNovoPais.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-       FloatingActionButton botaoNovoPais = findViewById(R.id.activity_lista_fab_novo_pais);
-       botaoNovoPais.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
+                abreFormularioPaisActivity();
+            }
+        });
+    }
 
-               startActivity(new Intent(ListaPaisesActivity.this,
-                       FormularioPaisActivity.class));
-           }
-       });
-
-
-
-
+    private void abreFormularioPaisActivity() {
+        startActivity(new Intent(this, FormularioPaisActivity.class));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        PaisDao dao = new PaisDao();
+        configuraLista();
+    }
+
+    private void configuraLista() {
         ListView listaDePaises = findViewById(R.id.activity_lista_paises_listview);
         listaDePaises.setAdapter(new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 dao.todos()));
     }
-
-
 
 }

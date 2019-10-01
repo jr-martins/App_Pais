@@ -7,19 +7,18 @@ import br.com.teste.app_paises.model.Pais;
 
 public class PaisDao {
 
-    private final static List<Pais> pPaises = new ArrayList<>();
+    private final static List<Pais> ppaises = new ArrayList<>();
 
     public void salva(Pais pais) {
 
-        pPaises.add(pais);
+        ppaises.add(pais);
 
     }
 
     public List<Pais> todos(){
 
-        return new ArrayList<>(pPaises);
+        return new ArrayList<>(ppaises);
 
     }
-
 
 }

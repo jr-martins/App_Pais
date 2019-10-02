@@ -32,12 +32,12 @@ public class FormularioPaisActivity extends AppCompatActivity {
         setContentView(R.layout.activity_formulario_pais);
         bootFields();
         setSaveButton();
-        carryParents();
+        carryCoutry();
 
 
     }
 
-    private void carryParents() {
+    private void carryCoutry() {
         Intent dados = getIntent();
         if(dados.hasExtra(CHAVE_PAIS)){
             setTitle(TITULO_APPBAR_EDITA_PAIS);

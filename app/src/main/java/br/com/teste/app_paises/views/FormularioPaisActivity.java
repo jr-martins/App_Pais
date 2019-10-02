@@ -44,8 +44,7 @@ public class FormularioPaisActivity extends AppCompatActivity {
 
 
 
-//        campoPais.setText(pais.getPais());
-       // campoContinente.setText(pais.getContinente());
+
 
 
 

@@ -33,6 +33,7 @@ public class ListaPaisesActivity extends AppCompatActivity {
         setTitle(TITULO_APPBAR);
 
         configuraFabNovoPais();
+        dao.salva(new Pais("Brasi", "Sul"));
 
     }
 
@@ -71,9 +72,7 @@ public class ListaPaisesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
                 Pais paisEscolhido = paises.get(posicao);
                 Intent vaiParaFormularioActivity = new Intent(ListaPaisesActivity.this, FormularioPaisActivity.class);
-
                 vaiParaFormularioActivity.putExtra("pais", paisEscolhido);
-
                 startActivity(vaiParaFormularioActivity);
 
 

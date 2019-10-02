@@ -7,14 +7,36 @@ import java.io.Serializable;
 public class Pais implements Serializable {
 
 
-    private final String pais;
-    private final String continente;
+    private int id = 0;
+    private  String pais;
+    private  String continente;
+
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public void setContinente(String continente) {
+        this.continente = continente;
+    }
 
     public Pais(String pais, String continente) {
 
         this.pais = pais;
         this.continente = continente;
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
     public String getPais() {
         return pais;
@@ -31,4 +53,12 @@ public class Pais implements Serializable {
         return pais;
     }
 
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 }

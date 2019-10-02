@@ -30,20 +30,20 @@ public class FormularioPaisActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_pais);
-        inicializacaoCampos();
-        configuraBotaoSalvar();
-        carregaPais();
+        bootFields();
+        setSaveButton();
+        carryParents();
 
 
     }
 
-    private void carregaPais() {
+    private void carryParents() {
         Intent dados = getIntent();
         if(dados.hasExtra(CHAVE_PAIS)){
             setTitle(TITULO_APPBAR_EDITA_PAIS);
 
             pppais = (Pais) dados.getSerializableExtra(CHAVE_PAIS);
-            preencheCampos();
+            fillTheFields();
 
         }else{
             setTitle(TITULO_APPBAR_NOVO_PAIS);
@@ -51,43 +51,40 @@ public class FormularioPaisActivity extends AppCompatActivity {
         }
     }
 
-    private void preencheCampos() {
+    private void fillTheFields() {
         campoPais.setText(pppais.getPais());
         campoContinente.setText(pppais.getContinente());
     }
 
-    private void configuraBotaoSalvar() {
+    private void setSaveButton() {
         Button botaoSalvar = findViewById(R.id.activity_formulario_pais_botao_salvar);
         botaoSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finalizaFormulario();
+                finalizeForm();
             }
         });
     }
 
-    private void finalizaFormulario() {
-        preenchePais();
+    private void finalizeForm() {
+        fillCountry();
 
-        if(pppais.temIdValido()){
-            dao.edita(pppais);
+        if(pppais.invalidId()){
+            dao.edit(pppais);
 
         }else {
-            dao.salva(pppais);
+            dao.toSave(pppais);
 
         }
         finish();
     }
 
-    private void inicializacaoCampos() {
+    private void bootFields() {
         campoPais = findViewById(R.id.activity_formulario_pais_nome);
         campoContinente = findViewById(R.id.activity_formulario_continente);
     }
 
-
-
-
-    private void preenchePais() {
+    private void fillCountry() {
         String pais = campoPais.getText().toString();
         String continente = campoContinente.getText().toString();
 

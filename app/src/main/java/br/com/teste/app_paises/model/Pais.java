@@ -52,7 +52,7 @@ public class Pais implements Serializable {
         return id;
     }
 
-    public boolean temIdValido() {
+    public boolean invalidId() {
         return id > 0;
 
     }

@@ -33,53 +33,55 @@ public class ListaPaisesActivity extends AppCompatActivity {
 
         setTitle(TITULO_APPBAR);
 
-        configuraFabNovoPais();
-        dao.salva(new Pais("Brasil", "Sul"));
+        setUpFabNewCountry();
+
+        //inicio com um item na lista
+        dao.toSave(new Pais("Brasil", "Sul"));
 
     }
 
-    private void configuraFabNovoPais() {
+    private void setUpFabNewCountry() {
         FloatingActionButton botaoNovoPais = findViewById(R.id.activity_lista_fab_novo_pais);
         botaoNovoPais.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                abreFormularioModoInserePais();
+                openFormInsertsCountry();
             }
         });
     }
 
-    private void abreFormularioModoInserePais() {
+    private void openFormInsertsCountry() {
         startActivity(new Intent(this, FormularioPaisActivity.class));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        configuraLista();
+        setUpList();
     }
 
-    private void configuraLista() {
+    private void setUpList() {
         ListView listaDePaises = findViewById(R.id.activity_lista_paises_listview);
-        final List<Pais> paises = dao.todos();
+        final List<Pais> paises = dao.all();
         configuraAdapter(listaDePaises, paises);
-        configuraListenerDeCliquePorItem(listaDePaises);
+        clickListenerPerItemConfiguration(listaDePaises);
 
     }
 
-    private void configuraListenerDeCliquePorItem(ListView listaDePaises) {
+    private void clickListenerPerItemConfiguration(ListView listaDePaises) {
         listaDePaises.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
                 Pais paisEscolhido = (Pais) adapterView.getItemAtPosition(posicao);
-                abreFormularioModoEditaPais(paisEscolhido);
+                openFormEditModeCountry(paisEscolhido);
 
 
             }
         });
     }
 
-    private void abreFormularioModoEditaPais(Pais paisEscolhido) {
+    private void openFormEditModeCountry(Pais paisEscolhido) {
         Intent vaiParaFormularioActivity = new Intent(ListaPaisesActivity.this, FormularioPaisActivity.class);
         vaiParaFormularioActivity.putExtra(CHAVE_PAIS, paisEscolhido);
         startActivity(vaiParaFormularioActivity);

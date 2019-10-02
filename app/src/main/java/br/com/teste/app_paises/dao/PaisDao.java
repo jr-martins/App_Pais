@@ -9,33 +9,33 @@ import br.com.teste.app_paises.model.Pais;
 
 public class PaisDao {
 
-    private final static List<Pais> ppaises = new ArrayList<>();
+    private final static List<Pais> npaises = new ArrayList<>();
     private static int contadorDeIds = 1;
 
-    public void salva(Pais pais) {
+    public void toSave(Pais pais) {
         pais.setId(contadorDeIds);
-        ppaises.add(pais);
-        atualizaIds();
+        npaises.add(pais);
+        updateId();
     }
 
-    private void atualizaIds() {
+    private void updateId() {
         contadorDeIds++;
     }
 
-    public void edita(Pais pais){
-        Pais paisEncontrado = buscaPaisPeloId(pais);
+    public void edit(Pais pais){
+        Pais paisEncontrado = searchCountryId(pais);
         if(paisEncontrado != null){
 
-           int posicaoDoPais = ppaises.indexOf(paisEncontrado);
-           ppaises.set(posicaoDoPais, pais);
+           int posicaoDoPais = npaises.indexOf(paisEncontrado);
+           npaises.set(posicaoDoPais, pais);
 
         }
     }
 
     @Nullable
-    private Pais buscaPaisPeloId(Pais pais) {
+    private Pais searchCountryId(Pais pais) {
         Pais paisEncontrado = null;
-        for(Pais p : ppaises){
+        for(Pais p : npaises){
 
             if(p.getId() == pais.getId()){
                 return p;
@@ -44,8 +44,8 @@ public class PaisDao {
         return null;
     }
 
-    public List<Pais> todos(){
-        return new ArrayList<>(ppaises);
+    public List<Pais> all(){
+        return new ArrayList<>(npaises);
     }
 
 }

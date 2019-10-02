@@ -12,9 +12,13 @@ import br.com.teste.app_paises.dao.PaisDao;
 import br.com.teste.app_paises.R;
 import br.com.teste.app_paises.model.Pais;
 
+import static br.com.teste.app_paises.views.ConstantesActivities.CHAVE_PAIS;
+
+
 public class FormularioPaisActivity extends AppCompatActivity {
 
-    public static final String TITULO_APPBAR = "Novo País";
+    private static final String TITULO_APPBAR_NOVO_PAIS = "Adiciona País";
+    private static final String TITULO_APPBAR_EDITA_PAIS = "Edita País" ;
     private EditText campoPais;
     private EditText campoContinente;
     private Pais pppais;
@@ -26,30 +30,30 @@ public class FormularioPaisActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_pais);
-        setTitle(TITULO_APPBAR);
-
-
         inicializacaoCampos();
         configuraBotaoSalvar();
+        carregaPais();
 
+
+    }
+
+    private void carregaPais() {
         Intent dados = getIntent();
-        pppais = (Pais) dados.getSerializableExtra("pais");
+        if(dados.hasExtra(CHAVE_PAIS)){
+            setTitle(TITULO_APPBAR_EDITA_PAIS);
+
+            pppais = (Pais) dados.getSerializableExtra(CHAVE_PAIS);
+            preencheCampos();
+
+        }else{
+            setTitle(TITULO_APPBAR_NOVO_PAIS);
+            pppais = new Pais();
+        }
+    }
+
+    private void preencheCampos() {
         campoPais.setText(pppais.getPais());
         campoContinente.setText(pppais.getContinente());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     private void configuraBotaoSalvar() {
@@ -57,15 +61,22 @@ public class FormularioPaisActivity extends AppCompatActivity {
         botaoSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Pais paisCriado = preenchePais();
-//                salva(paisCriado);
-
-                preenchePais();
-                dao.edita(pppais);
-                finish();
-
+                finalizaFormulario();
             }
         });
+    }
+
+    private void finalizaFormulario() {
+        preenchePais();
+
+        if(pppais.temIdValido()){
+            dao.edita(pppais);
+
+        }else {
+            dao.salva(pppais);
+
+        }
+        finish();
     }
 
     private void inicializacaoCampos() {
@@ -73,10 +84,7 @@ public class FormularioPaisActivity extends AppCompatActivity {
         campoContinente = findViewById(R.id.activity_formulario_continente);
     }
 
-    private void salva(Pais paisCriado) {
-        dao.salva(paisCriado);
-        finish();
-    }
+
 
 
     private void preenchePais() {

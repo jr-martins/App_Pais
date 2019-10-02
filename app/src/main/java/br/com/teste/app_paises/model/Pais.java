@@ -11,7 +11,9 @@ public class Pais implements Serializable {
     private  String pais;
     private  String continente;
 
+    public Pais() {
 
+    }
     public void setPais(String pais) {
         this.pais = pais;
     }
@@ -25,18 +27,6 @@ public class Pais implements Serializable {
         this.pais = pais;
         this.continente = continente;
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
     public String getPais() {
         return pais;
@@ -60,5 +50,10 @@ public class Pais implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public boolean temIdValido() {
+        return id > 0;
+
     }
 }
